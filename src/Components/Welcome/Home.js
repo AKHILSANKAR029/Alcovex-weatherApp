@@ -1,9 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import axios from 'axios';
-
-
 
 function Home() {
     const [city, setCity] = useState();
@@ -13,6 +10,7 @@ function Home() {
         city: ""
     })
 
+    // By default this will load the weather report of visakhapatnam.
     useEffect(() => {
         var url = `https://api.openweathermap.org/data/2.5/weather?q=Visakhapatnam&units=metric&appid=387729f8d6de06a1c05a3ac870ffb50c`
         axios.get(url)
@@ -25,6 +23,7 @@ function Home() {
             })
     }, [])
 
+    // Updates the loading state according to the weather state.
     useEffect(() => {
         if (!weather.temp && !weather.city) {
             setIsLoading(true);
@@ -33,10 +32,12 @@ function Home() {
         }
     })
 
+    // This function handle the input given by the user.
     const handleChange = (e) => {
         setCity(e.target.value);
     }
 
+    // This function will handle the getWeather button.
     const handleClick = () => {
         setWeather({
             temp: "",
